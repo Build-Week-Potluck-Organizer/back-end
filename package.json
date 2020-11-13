@@ -1,0 +1,42 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "back-end code for Build Week Potluck Organizer project",
+  "main": "index.js",
+  "scripts": {
+    "test:watch": "cross-env NODE_ENV=testing jest --watch",
+    "test": "cross-env NODE_ENV=testing jest",
+    "server": "cross-env NODE_ENV=development nodemon -r dotenv/config index.js",
+    "start:watch": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Build-Week-Potluck-Organizer/back-end.git"
+  },
+  "author": "Patrick Oliver",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Build-Week-Potluck-Organizer/back-end/issues"
+  },
+  "homepage": "https://github.com/Build-Week-Potluck-Organizer/back-end#readme",
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.0.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.12",
+    "pg": "^8.5.0"
+  }, 
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
