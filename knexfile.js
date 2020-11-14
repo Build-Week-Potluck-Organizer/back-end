@@ -1,7 +1,9 @@
-require("dotenv").config();
+// require("dotenv").config();
+var dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 const pg = require("pg");
 
-pg.defaults.ssl = true;
+// pg.defaults.ssl = true;
 
 module.exports = {
   development: {
@@ -14,6 +16,9 @@ module.exports = {
       directory: "./data/migrations",
     },
     seeds: { directory: "./data/seeds" },
+    pool: {
+      min:2, max:10
+    }
   },
   testing: {
     client: "sqlite3",
