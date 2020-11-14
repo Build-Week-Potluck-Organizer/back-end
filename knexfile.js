@@ -7,6 +7,9 @@ module.exports = {
   development: {
     client: "pg",
     connection: process.env.DB_URL,
+    // connection: {
+    //   filename: "./data/users.db3",
+    //   },
     migrations: {
       directory: "./data/migrations",
     },
@@ -24,7 +27,7 @@ module.exports = {
     seeds: {
       directory: "./data/seeds",
     },
-    // this is needed when using foreign keys
+    // this is needed when using foreign keys for sqlite3
 	pool: {
 		afterCreate: (conn, done) => {
 			// runs after a connection is made to the sqlite engine

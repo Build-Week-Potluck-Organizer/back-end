@@ -20,7 +20,7 @@ server.use(express.json());
 // server.use("/api/auth", authRouter);
 
 server.get("/", (req, res) => {
-  res.json({ api: "up" });
+  res.json({ "message": "api is go" });
 });
 
 server.use((err, req, res, next) => {
