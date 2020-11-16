@@ -89,20 +89,35 @@ router.get('/:id/menu', (req, res) => {
 })
 
 // create new event (done)
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
     const newEvent = req.body;
     // newEvent.organizer_id = req.user.id;
     Event.createEvent(newEvent)
-      .then((newEvent) => {
+      .then(newEvent => {
         res.status(201).json(newEvent);
       })
       .catch((error) => {
         console.log(error);
         res.status(500).json({
           message: "system error",
+          newEvent,
+          error: error     
         })
       })
 })
+
+// // create new event (async-await refactor)
+// router.post('/', async (req, res, next) => {
+//     try {
+//         const newEvent = await Event.createEvent(req.body)
+//         return res.status(201).json({
+//             message: 'event created',
+//             newEvent
+//         })
+//     } catch(err) {
+//         next(err)
+//     }
+// })
 
 // add location to new event (done)
 router.post('/:id/location', (req, res) => {

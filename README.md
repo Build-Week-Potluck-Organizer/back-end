@@ -53,7 +53,7 @@
 }
 ```
 
-# get-user's-events-by-id data returned
+# get-user's-events-by-user-id data returned
 
 ```js
 [
@@ -67,3 +67,128 @@
   }
 ]
 ```
+
+# events endpoints:
+
+| Method | URL                       | Requires                   | Description                                                              |
+| ------ | ------------------------- | -------------------------- | ------------------------------------------------------------------------ |
+| GET    | /api/events/              | `token`                    | returns all events                                                       |
+| GET    | /api/events/:id           | `token`                    | returns a given event by its `id`                                        |
+| GET    | /api/events/:id/guestlist | `token`                    | returns a given event's guestlist by event `id`                          || GET    | /api/events/:id/location  | `token`                    | returns a given event's location by event `id`                           |
+| GET    | /api/events/:id/menu      | `token`                    | returns a given event's menu by event `id`                               |
+
+# get-events data returned:
+
+```js
+[
+  {
+    "event_id": 1,
+    "event_name": "4th of July BBQ",
+    "description": "informal get-together, B.Y.O.B., etc.",
+    "organizer_id": 1,
+    "date": "July 4th, 2021",
+    "time": "12:00 PM"
+  },
+  {
+    "event_id": 2,
+    "event_name": "St. Patrick's Day Party",
+    "description": "informal get-together, B.Y.O.B., etc.",
+    "organizer_id": 1,
+    "date": "March 17th, 2021",
+    "time": "5:30 PM"
+  },
+  {
+    "event_id": 3,
+    "event_name": "Halloween Party",
+    "description": "informal get-together, B.Y.O.B., etc.",
+    "organizer_id": 2,
+    "date": "October 31st, 2021",
+    "time": "6:00 PM"
+  },
+  {
+    "event_id": 4,
+    "event_name": "Thanksgiving Potluck",
+    "description": "informal get-together, B.Y.O.B., etc.",
+    "organizer_id": 2,
+    "date": "November 25th, 2021",
+    "time": "7:00 PM"
+  }
+]
+```
+
+# get-event-by-id data returned:
+
+```js
+{
+  "event": {
+    "event_id": 3,
+    "event_name": "Halloween Party",
+    "description": "informal get-together, B.Y.O.B., etc.",
+    "organizer_id": 2,
+    "date": "October 31st, 2021",
+    "time": "6:00 PM"
+  },
+  "guestlist": [
+    {
+      "guest_id": 3,
+      "username": "fulano",
+      "event_id": 3,
+      "attending": true
+    }
+  ],
+  "location": [
+    {
+      "event_id": 3,
+      "address": "1571 Lepanto Avenue, Somewhere, MO 54321"
+    }
+  ],
+  "food": [
+    {
+      "event_id": 3,
+      "dish": "caramel apples",
+      "quantity": 6,
+      "guest_name": "fulano",
+      "bringing": true
+    }
+  ]
+}
+```
+
+# get-event-guestlist-by-event-id data returned:
+
+```js
+[
+  {
+    "guest_id": 3,
+    "username": "fulano",
+    "event_id": 3,
+    "attending": true
+  }
+]
+```
+
+# get-event-location-by-event-id data returned:
+
+```js
+[
+  {
+    "event_id": 2,
+    "address": "1066 Hastings Street, Anytown, ME 12345"
+  }
+]
+```
+
+# get-even-menu-by-event-id data returned:
+
+```js
+[
+  {
+    "event_id": 2,
+    "dish": "soda bread",
+    "quantity": 2,
+    "guest_name": "fulana",
+    "bringing": true
+  }
+]
+```
+#
