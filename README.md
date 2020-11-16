@@ -74,8 +74,10 @@
 | ------ | ------------------------- | -------------------------- | ------------------------------------------------------------------------ |
 | GET    | /api/events/              | `token`                    | returns all events                                                       |
 | GET    | /api/events/:id           | `token`                    | returns a given event by its `id`                                        |
-| GET    | /api/events/:id/guestlist | `token`                    | returns a given event's guestlist by event `id`                          || GET    | /api/events/:id/location  | `token`                    | returns a given event's location by event `id`                           |
+| GET    | /api/events/:id/guestlist | `token`                    | returns a given event's guestlist by event `id`                          |
 | GET    | /api/events/:id/menu      | `token`                    | returns a given event's menu by event `id`                               |
+
+| GET    | /api/events/:id/location  | `token`                    | returns a given event's location by event `id`                           |
 
 # get-events data returned:
 
