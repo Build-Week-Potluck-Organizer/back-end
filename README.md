@@ -26,6 +26,7 @@
 
 # get-users data returned:
 
+```js
 [
   {
     "id": 1,
@@ -38,17 +39,21 @@
     "password": "$2a$08$tGXmUAGmTQ.dN3o.Krj.WeRP99ZqMg39cT2JhUY/5s.wYFdSzh6Z2"
   }
 ]
+```
 
 # get-user-by-id data returned:
 
+```js
 {
   "id": 1,
   "username": "fulano",
   "password": "$2a$08$KhAyzK5CsYUfmWW2lPtlHOxwbi59fsHGRZLX06cEKk/CpXO/lxmWW"
 }
+```
 
 # get-user's-events-by-id data returned
 
+```js
 [
   {
     "username": "fulano",
@@ -59,3 +64,4 @@
     "event_name": "St. Patrick's Day Party"
   }
 ]
+```
