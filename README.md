@@ -77,6 +77,9 @@
 | GET    | /api/events/:id/guestlist | `token`                    | returns a given event's guestlist by event `id`                          |
 | GET    | /api/events/:id/location  | `token`                    | returns a given event's location by event `id`                           |
 | GET    | /api/events/:id/menu      | `token`                    | returns a given event's menu by event `id`                               |
+| DELETE | /api/events/:id           | `token`                    | deletes a given event by its `id`                                        |
+| DELETE | /api/events/:id/guestlist | guest's `username` `token` | deletes a given event guest by event `id` and guest `username`           |
+| DELETE | /api/events/:id/menu      | name of `dish` `token`     | deletes a given dish by event `id` and name of `dish`                    |
 
 # get-events data returned:
 
