@@ -80,6 +80,12 @@
 | DELETE | /api/events/:id           | `token`                    | deletes a given event by its `id`                                        |
 | DELETE | /api/events/:id/guestlist | guest's `username` `token` | deletes a given event guest by event `id` and guest `username`           |
 | DELETE | /api/events/:id/menu      | name of `dish` `token`     | deletes a given dish by event `id` and name of `dish`                    |
+| POST   | /api/events/              | pending...                 | creates a new event                                                      |
+| POST   | /api/events/:id/location  | pending...                 | creates a new location for an event by event `id`                        |
+| POST   | /api/events/:id/guestlist | pending...                 | creates a new guest for an event by event `id`                           |
+| POST   | /api/events/:id/menu      | pending...                 | creates a new dish for an event by event `id`                            |
+| PUT    | /api/events/:id           | pending...                 | edits a given event by its `id`                                          |
+| PUT    | /api/events/:id/location  | pending...                 | edits a given event's location by event `id`                             || PUT    | /api/events/:id/guestlist | pending...                 | edits a given event guest by event `id` and guest `username`             || PUT    | /api/events/:id/menu      | pending...                 | edits a given event dish event `id` and name of `dish`                   |                         
 
 # get-events data returned:
 
