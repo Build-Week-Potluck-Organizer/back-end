@@ -85,8 +85,7 @@
 | POST   | /api/events/:id/guestlist | pending...                 | creates a new guest for an event by event `id`                           |
 | POST   | /api/events/:id/menu      | pending...                 | creates a new dish for an event by event `id`                            |
 | PUT    | /api/events/:id           | pending...                 | edits a given event by its `id`                                          |
-| PUT    | /api/events/:id/location  | pending...                 | edits a given event's location by event `id`                             || PUT    | /api/events/:id/guestlist | pending...                 | edits a given event guest by event `id` and guest `username`             || PUT    | /api/events/:id/menu      | pending...                 | edits a given event dish event `id` and name of `dish`                   |                         
-
+| PUT    | /api/events/:id/location  | pending...                 | edits a given event's location by event `id`                             || PUT    | /api/events/:id/guestlist | pending...                 | edits a given event guest by event `id` and guest `username`             || PUT    | /api/events/:id/menu      | pending...                 | edits a given event dish event `id` and name of `dish`                   || PUT    | /api/events/:id/guestlist | pending...                 | edits a given event guest by event `id` and guest `username`             || PUT    | /api/events/:id/menu      | pending...                 | edits a given event dish event `id` and name of `dish`                   |                         
 # get-events data returned:
 
 ```js
