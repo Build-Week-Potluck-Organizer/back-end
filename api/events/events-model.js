@@ -38,7 +38,7 @@ function addLocation(event_id, location) {
         address: location.address
     })
 }
-// possible refactor due to strange preview return in TablePlus
+
 function addFood(id, food) {
     return db('menus').insert({
         event_id: id, 
@@ -48,7 +48,7 @@ function addFood(id, food) {
         bringing: food.bringing,
     })
 }
-// possible refactor due to strange preview return in TablePlus
+
 function addGuest(id, guest) {
     return db('guestlists').insert({
       event_id: id,
