@@ -9,12 +9,14 @@
 
 # POST login data returned:
 
+```js
 {
   "message": "Welcome, fulana!",
   "username": "fulana",
   "id": 2,
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJpYXQiOjE2MDU1NDk5ODV9.O62hHFijS7s_WE1mzX3JBt8ina3PerHDGVKjMLsUjlA"
 }
+```
 
 # users endpoints:
 
