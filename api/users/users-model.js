@@ -10,12 +10,12 @@ function getUserById(id) {
     .first();
 }
 
-function getUserEvents(username) {
-  return db()
-    .select('*')
-    .from('potluck_guest')
-    .where({ username })
-    .innerJoin('event', 'potluck_guest.event.id', 'event.event_id')
+function getUserEvents(id) {
+  return db('events')
+    .innerJoin('users', 'events.organizer_id', 'users.id')
+    .where('events.organizer_id', id)
+    .select('users.username', 'events.event_name')
+    .from('events')
 }
 
 function registerUser(user) {
@@ -28,10 +28,15 @@ function loginUser(username) {
     .first()
 }
 
+function findBy(filter) {
+  return db("users").where(filter);
+}
+
 module.exports = {
   getUsers, 
   getUserById,
   registerUser,
   getUserEvents,
-  loginUser
+  loginUser,
+  findBy,
 };

@@ -1,12 +1,12 @@
-const express = require("express");
-const bcrypt = require("bcryptjs");
-const Users = require("../users/users-model");
-const generateToken = require("./createToken");
-require("dotenv").config();
+const express = require("express")
+const bcrypt = require("bcryptjs")
+const Users = require("../users/users-model")
+const createToken = require("./createToken")
+require("dotenv").config()
 
-const router = express.Router();
+const router = express.Router()
 
-const hashCount = parseInt(process.env.HASH_COUNT) || 8;
+const hashCount = parseInt(process.env.HASH_COUNT) || 8
 
 //register
 router.post("/register", validateUserData, checkUsername, (req, res) => {
@@ -15,13 +15,13 @@ router.post("/register", validateUserData, checkUsername, (req, res) => {
   const hash = bcrypt.hashSync(user.password, hashCount);
   user.password = hash;
 
-  Users.add(user)
+  Users.registerUser(user)
     .then((saved) => {
       res.status(201).json(saved);
     })
     .catch((err) => {
       res.status(500).json({
-        message: "Unable to add user to database.",
+        message: "unable to register new user",
       });
     });
 });
@@ -34,7 +34,7 @@ router.post("/login", validateUserData, (req, res) => {
     .first()
     .then((user) => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        const token = generateToken(user);
+        const token = createToken(user);
 
         res.status(200).json({
           message: `Welcome, ${user.username}!`,

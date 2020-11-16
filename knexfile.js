@@ -1,9 +1,7 @@
-// require("dotenv").config();
+require("dotenv").config();
 var dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const pg = require("pg");
-
-// pg.defaults.ssl = true;
 
 module.exports = {
   development: {

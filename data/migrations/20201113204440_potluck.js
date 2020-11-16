@@ -1,13 +1,13 @@
 exports.up = async function(knex) {
     await knex.schema.createTable('users', table => {
       table.increments()
-      table.string('username', 30).unique().notNullable()
-      table.string('password', 30).notNullable()
+      table.string('username').unique().notNullable()
+      table.string('password').notNullable()
     })
   
-    await knex.schema.createTable('event', table => {
+    await knex.schema.createTable('events', table => {
       table.increments('event_id')
-      table.string('event_name', 50).notNullable()
+      table.string('event_name').notNullable()
       table.string('description', 500)
       table
         .integer('organizer_id')
@@ -15,21 +15,21 @@ exports.up = async function(knex) {
         .inTable('users')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
-      table.date('date').notNullable()
-      table.time('time').notNullable()
+      table.string('date').notNullable()
+      table.string('time').notNullable()
     })
   
-    await knex.schema.createTable('location', table => {
+    await knex.schema.createTable('locations', table => {
       table
         .integer('event_id')
         .references('event_id')
-        .inTable('event')
+        .inTable('events')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
-      table.string('address', 100).notNullable()
+      table.string('address').notNullable()
     });
   
-    await knex.schema.createTable('potluck_guest', table => {
+    await knex.schema.createTable('guestlists', table => {
       table.increments('guest_id')
       table
         .string('username')
@@ -41,22 +41,22 @@ exports.up = async function(knex) {
       table
         .integer('event_id')
         .references('event_id')
-        .inTable('event')
+        .inTable('events')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
         .notNullable()
-      table.boolean('going').defaultTo(null)
+      table.boolean('attending').defaultTo(null)
     });
   
-    await knex.schema.createTable('event_food_list', table => {
+    await knex.schema.createTable('menus', table => {
       table
         .integer('event_id')
         .references('event_id')
-        .inTable('event')
+        .inTable('events')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
         .notNullable();
-      table.string('recipe_name').notNullable()
+      table.string('dish').notNullable()
       table.integer('quantity').defaultTo(1)
       table
         .string('guest_name')
@@ -65,16 +65,15 @@ exports.up = async function(knex) {
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
         .defaultTo(null);
-      table.boolean('being_brought').defaultTo(false)
+      table.boolean('bringing').defaultTo(false)
     })
   }
   
   exports.down = async function(knex, Promise) {
+    await knex.schema.dropTableIfExists('menus')
+    await knex.schema.dropTableIfExists('guestlists')
+    await knex.schema.dropTableIfExists('locations')
+    await knex.schema.dropTableIfExists('events')
     await knex.schema.dropTableIfExists('users')
-    await knex.schema.dropTableIfExists('event')
-    await knex.schema.dropTableIfExists('location')
-    await knex.schema.dropTableIfExists('potluck_guest')
-    await knex.schema.dropTableIfExists('food')
-    await knex.schema.dropTableIfExists('event_food_list')
   }
   
