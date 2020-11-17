@@ -10,9 +10,9 @@ function createToken(user) {
 
   const secret = process.env.JWT_SECRET || "No me digas.";
 
-//   const options = {
-//     expiresIn: "2h",
-//   };
+  const options = {
+    expiresIn: "2h",
+  };
 
-  return jwt.sign(payload, secret/*, options */);
+  return jwt.sign(payload, secret, options);
 }

@@ -1,9 +1,10 @@
 const express = require("express");
 const Event = require("./events-model");
+// const db = require('../../data/dbconfig');
 
 const router = express.Router();
 
-// get events (done)
+// get events
 router.get('/', (req, res) => {
     Event.getEvents()
         .then(event => {
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
         })
 })
 
-// // get event by id (done)
+// // get event by id 
 // router.get('/:id', async (req, res, next) => {
 //     try {
 //       const event = await Event.getEventById(req.params.id)
@@ -26,7 +27,7 @@ router.get('/', (req, res) => {
 //     }
 //   })
 
-// get event by id (extended form) (done)
+// get event by id (extended form)
 router.get('/:id', (req, res) => {
     Event.getEventById(req.params.id)
       .then(event => {
@@ -49,7 +50,7 @@ router.get('/:id', (req, res) => {
       });
 });
 
-// get event guestlist by event id (done)
+// get event guestlist by event id 
 router.get('/:id/guestlist', (req, res) => {
     Event.getEventGuests(req.params.id)
         .then(guestlist => {
@@ -62,7 +63,7 @@ router.get('/:id/guestlist', (req, res) => {
         })
 })
 
-// get event location by event id (done)
+// get event location by event id 
 router.get('/:id/location', (req, res) => {
     Event.getLocation(req.params.id)
         .then(location => {
@@ -75,7 +76,7 @@ router.get('/:id/location', (req, res) => {
         })
 })
 
-// get event menu by event id (done)
+// get event menu by event id 
 router.get('/:id/menu', (req, res) => {
     Event.getEventFood(req.params.id)
         .then(menu => {
@@ -88,10 +89,9 @@ router.get('/:id/menu', (req, res) => {
         })
 })
 
-// create new event (done)
+// create new event 
 router.post('/', (req, res) => {
     const newEvent = req.body;
-    // newEvent.organizer_id = req.user.id;
     Event.createEvent(newEvent)
       .then(newEvent => {
         res.status(201).json(newEvent);
@@ -108,6 +108,7 @@ router.post('/', (req, res) => {
 
 // // create new event (async-await refactor)
 // router.post('/', async (req, res, next) => {
+//     console.log(req.body)
 //     try {
 //         const newEvent = await Event.createEvent(req.body)
 //         return res.status(201).json({
@@ -119,7 +120,7 @@ router.post('/', (req, res) => {
 //     }
 // })
 
-// add location to new event (done)
+// add location to new event 
 router.post('/:id/location', (req, res) => {
     Event.addLocation(req.params.id, req.body)
         .then((location) => {
@@ -135,7 +136,7 @@ router.post('/:id/location', (req, res) => {
         })
 })
 
-// add guests to event guestlist (done)
+// add guests to event guestlist 
 router.post('/:id/guestlist', (req, res) => {
     Event.addGuest(req.params.id, req.body)
         .then(guest => {
@@ -151,7 +152,7 @@ router.post('/:id/guestlist', (req, res) => {
         })
 })
 
-// add item to event menu (done)
+// add item to event menu 
 router.post('/:id/menu', (req, res) => {
     Event.addFood(req.params.id, req.body)
         .then(food => {
@@ -167,7 +168,7 @@ router.post('/:id/menu', (req, res) => {
         })
 })
 
-// edit event (done)
+// edit event 
 router.put('/:id', (req, res) => {
     Event.updateEvent(req.params.id, req.body)
         .then(event => {
@@ -183,11 +184,11 @@ router.put('/:id', (req, res) => {
         })
 })
 
-// edit menu item (done) (doesn't edit dish)
+// edit menu item (doesn't edit dish property)
 router.put('/:id/menu', (req, res) => {
     Event.updateFood(req.params.id, req.body)
         .then(food => {
-            res.status(201).json({
+            res.status(200).json({
                  message:'menu item edited',
                  food
             })
@@ -199,11 +200,11 @@ router.put('/:id/menu', (req, res) => {
         })
 })
 
-// edit guests (done) 
+// edit guests  
 router.put('/:id/guestlist', (req, res) => {
     Event.updateGuest(req.params.id, req.body)
         .then(guest => {
-            res.status(201).json({
+            res.status(200).json({
                  message:'guest edited',
                  guest
             })
@@ -215,7 +216,7 @@ router.put('/:id/guestlist', (req, res) => {
         })
 })
 
-// edit location (done)
+// edit location 
 router.put('/:id/location', (req, res) => {
     Event.updateLocation(req.params.id, req.body)
         .then(location => {
@@ -231,7 +232,7 @@ router.put('/:id/location', (req, res) => {
         })
 })
 
-// delete event (done)
+// delete event 
 router.delete('/:id', (req, res) => {
     Event.getEventById(req.params.id)
         .then(exEvent => {
@@ -256,7 +257,7 @@ router.delete('/:id', (req, res) => {
         })
 })
 
-// delete menu item (done)
+// delete menu item 
 router.delete('/:id/menu', (req, res) => {
     Event.delFood(req.params.id, req.body.dish)
         .then(food => {
@@ -279,7 +280,7 @@ router.delete('/:id/menu', (req, res) => {
         })
 })
 
-// delete guest (done)
+// delete guest 
 router.delete('/:id/guestlist', (req, res) => {
     Event.delGuest(req.params.id, req.body.username)
         .then(guest => {

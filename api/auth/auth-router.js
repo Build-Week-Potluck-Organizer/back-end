@@ -8,7 +8,7 @@ const router = express.Router()
 
 const hashCount = parseInt(process.env.HASH_COUNT) || 8
 
-//register
+// register
 router.post("/register", validateUserData, checkUsername, (req, res) => {
   const user = req.body;
 
@@ -26,7 +26,7 @@ router.post("/register", validateUserData, checkUsername, (req, res) => {
     });
 });
 
-//login
+// login
 router.post("/login", validateUserData, (req, res) => {
   const { username, password } = req.body;
 
