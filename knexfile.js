@@ -1,7 +1,7 @@
 // require("dotenv").config();
 var dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-// const pg = require("pg");
+const pg = require("pg");
 
 module.exports = {
   development: {
