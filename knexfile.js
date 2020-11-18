@@ -7,9 +7,6 @@ module.exports = {
   development: {
     client: "pg",
     connection: process.env.DATABASE_URL,
-    // connection: {
-    //   filename: "./data/users.db3",
-    //   },
     migrations: {
       directory: "./data/migrations",
     },
@@ -21,7 +18,7 @@ module.exports = {
   testing: {
     client: "sqlite3",
     connection: {
-      // filename: "./data/-test.db3",
+      filename: "./data/potluck-test.db3",
     },
     useNullAsDefault: true,
     migrations: {

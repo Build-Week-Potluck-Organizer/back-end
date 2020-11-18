@@ -21,7 +21,7 @@ server.use("/api/events", /* restricted, */ eventsRouter);
 server.use("/api/auth", authRouter);
 
 server.get("/", (req, res) => {
-  res.json({ "message": "api is go" });
+  res.json({ message: "api is go" });
 });
 
 server.use((err, req, res, next) => {
