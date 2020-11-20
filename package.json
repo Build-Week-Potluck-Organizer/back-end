@@ -10,7 +10,7 @@
     "start:watch": "cross-env NODE_ENV=development nodemon index.js",
     "start": "node index.js"
   },
-  "repository": {
+  "repository": { 
     "type": "git",
     "url": "git+https://github.com/Build-Week-Potluck-Organizer/back-end.git"
   },

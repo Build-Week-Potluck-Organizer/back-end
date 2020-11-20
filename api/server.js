@@ -16,8 +16,14 @@ server.use(cors());
 server.use(express.json());
 server.use(bodyParser.json());
 
-server.use("/api/users", /* restricted, */ usersRouter); 
-server.use("/api/events", /* restricted, */ eventsRouter);
+// // servers with restricted middleware
+// server.use("/api/users", restricted,  usersRouter); 
+// server.use("/api/events", restricted, eventsRouter);
+
+//  servers without restricted middleware
+server.use("/api/users", usersRouter); 
+server.use("/api/events", eventsRouter);
+
 server.use("/api/auth", authRouter);
 
 server.get("/", (req, res) => {

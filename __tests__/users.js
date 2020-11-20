@@ -1,7 +1,17 @@
 const supertest = require('supertest')
 const server = require('../api/server')
+const db = require('../data/dbconfig')
+require('dotenv').config();
 
-describe('users integeration test', () => {
+beforeEach(async () => {
+    await db.seed.run();
+  });
+  
+  afterAll(async () => {
+    await db.destroy();
+  });  
+
+describe('users integeration tests', () => {
     it('GET /users', async () => {
         const res = await supertest(server).get('/api/users')
         expect(res.statusCode).toBe(200)
