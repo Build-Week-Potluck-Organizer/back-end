@@ -18,8 +18,9 @@ function getUserEvents(id) {
     .from('events')
 }
 
-function registerUser(user) {
-  return db('users').insert(user)
+async function registerUser(user) {
+  const [id] = await db('users').insert(user, "id")
+  return getUserById(id);
 }
 
 function loginUser(username) {

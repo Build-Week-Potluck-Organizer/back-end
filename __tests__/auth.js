@@ -46,9 +46,10 @@ describe('authorization integration tests', () => {
         const res = await supertest(server) 
         .post('/api/auth/register')
         .send(test_register)
+        // console.log(res)
         expect(res.type).toBe('application/json')
         expect(res.statusCode).toBe(201)
-        expect(res.body.username).toBe('fulanito')
+        expect(res.body.saved.username).toBe('fulanito')
     })
 
 })

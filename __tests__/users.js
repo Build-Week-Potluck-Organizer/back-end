@@ -14,6 +14,7 @@ beforeEach(async () => {
 describe('users integeration tests', () => {
     it('GET /users', async () => {
         const res = await supertest(server).get('/api/users')
+        // console.log(res)
         expect(res.statusCode).toBe(200)
         expect(res.type).toBe('application/json')
         expect(res.body).toHaveLength(2)

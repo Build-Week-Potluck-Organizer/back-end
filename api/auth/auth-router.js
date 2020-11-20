@@ -17,7 +17,9 @@ router.post("/register", validateUserData, checkUsername, (req, res) => {
 
   Users.registerUser(user)
     .then((saved) => {
-      res.status(201).json(saved);
+      const token = createToken(saved)
+      delete saved.password
+      res.status(201).json({saved, token});
     })
     .catch((err) => {
       res.status(500).json({
