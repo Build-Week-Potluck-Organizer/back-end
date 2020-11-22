@@ -155,7 +155,7 @@ router.post('/:id/guestlist', (req, res) => {
 // add item to event menu 
 router.post('/:id/menu', (req, res) => {
     Event.addFood(req.params.id, req.body)
-        .then(food => {
+        .then((food) => {
             res.status(201).json({
                  message:'menu item added',
                  food
@@ -171,8 +171,8 @@ router.post('/:id/menu', (req, res) => {
 // edit event 
 router.put('/:id', (req, res) => {
     Event.updateEvent(req.params.id, req.body)
-        .then(event => {
-            res.status(201).json({
+        .then((event) => {
+            res.status(200).json({
                  message:'event edited',
                  event
             })
@@ -220,7 +220,7 @@ router.put('/:id/guestlist', (req, res) => {
 router.put('/:id/location', (req, res) => {
     Event.updateLocation(req.params.id, req.body)
         .then(location => {
-            res.status(201).json({
+            res.status(200).json({
                  message:'location edited',
                  location
             })

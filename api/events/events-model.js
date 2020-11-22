@@ -1,7 +1,8 @@
 const db = require("../../data/dbconfig.js")
 
-function createEvent(event) {
-    return db('events').insert(event);
+async function createEvent(event) {
+    const [event_id] = await db('events').insert(event).returning("event_id");
+    return getEventById(event_id);
 }
 
 function getEvents() {
@@ -32,84 +33,69 @@ function getLocation(id) {
         .where({ event_id: id })
 }
 
-function addLocation(event_id, location) {
-    return db('locations').insert({
+async function addLocation(event_id, location) {
+    const newLocation = {
         event_id,
         address: location.address
-    })
+    }
+    await db('locations').where({ event_id }).insert(newLocation)
+    return getLocation(event_id)
 }
 
-function addFood(id, food) {
-    return db('menus').insert({
-        event_id: id, 
+async function addFood(event_id, food) {
+    const newFood = {
+        event_id, 
         dish: food.dish, 
         quantity: food.quantity,
         guest_name: food.guest_name,
         bringing: food.bringing,
-    })
+    }
+    await db('menus').where({ event_id }).insert(newFood)
+    return getEventFood(event_id)
 }
 
-function addGuest(id, guest) {
-    return db('guestlists').insert({
-      event_id: id,
-      username: guest.username,
-      attending: guest.attending
-    });
-  }
-
-function updateEvent(id, event) {
-    return db('events')
-        .where({ event_id: id })
-        .update(event)
+async function addGuest(event_id, guest) {
+    const newGuest = {
+        event_id,
+        username: guest.username,
+        attending: guest.attending
+    }
+    await db('guestlists').where({ event_id }).insert(newGuest)
+    return getEventGuests(event_id)
 }
 
-function updateLocation(id, location) {
-    return db('locations')
-        .where({ event_id: id })
-        .update(location)
+async function updateEvent(event_id, event) {
+    await db('events').where({ event_id }).update(event)
+    return getEventById(event_id)
+}
+
+async function updateLocation(event_id, location) {
+    await db('locations').where({ event_id }).update(location)
+    return getLocation(event_id)
 }
 
 // doesn't update dish
-function updateFood(id, food) {
-    return db('menus')
-        .where({ event_id: id })
-        .andWhere(function() {
-            this.where('dish', '=', food.dish)
-        })
-        .update(food)
+async function updateFood(event_id, food) {
+    await db('menus').where({ event_id, dish: food.dish }).update(food)
+    return getEventFood(event_id)
 }
 
-function updateGuest(id, guest) {
-    return db('guestlists')
-        .where({ event_id: id })
-        .andWhere(function() {
-            this.where('username', '=', guest.username)
-        })
-        .update(guest)
+// doesn't update username (i.e. guest)
+async function updateGuest(event_id, guest) {
+    await db('guestlists').where({ event_id, username: guest.username }).update(guest)
+    return getEventGuests(event_id)
 }
 
-function delEvent(id) {
-    return db('events')
-        .where({ event_id: id })
-        .del()
+function delEvent(event_id) {
+    return db('events').where({ event_id }).del()
 }
 
-function delFood(id, food) {
-    return db('menus')
-        .where({ event_id: id })
-        .andWhere(function() {
-            this.where('dish', '=', food)
-        })
-        .del()
+function delFood(event_id, food) {
+    return db('menus').where({ event_id, dish: food }).del()
 }
 
-function delGuest(id, user) {
-    return db('guestlists')
-        .where({ event_id: id }) 
-        .andWhere(function() {
-            this.where('username', '=', user)
-        })
-        .del()
+function delGuest(event_id, user) {
+    return db('guestlists').where({ event_id, username: user }).del()
 }
 
 module.exports = {
