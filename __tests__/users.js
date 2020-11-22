@@ -5,23 +5,19 @@ require('dotenv').config();
 
 const token1 = process.env.TOKEN_1
 
-const token2 = process.env.TOKEN_2
-
 describe('users integeration tests', () => {
-  it('GET /users', async () => {
+  it('GET /api/users', async () => {
     const res = await supertest(server)
       .get('/api/users')
       .set('Authorization', token1)
-      // console.log(res)
       expect(res.statusCode).toBe(200)
       expect(res.type).toBe('application/json')
       expect(res.body).toHaveLength(2)
       expect(res.body[0].username).toBe('fulano')
       expect(res.body[1].username).toBe('fulana')
-      // expect(res.body[2].username).toBe('fulanito')
   })
 
-  it('GET /users/:id', async () => {
+  it('GET /api/users/:id', async () => {
     const res = await supertest(server)
       .get('/api/users/1')
       .set('Authorization', token1)
@@ -30,11 +26,10 @@ describe('users integeration tests', () => {
       expect(res.body.username).toBe('fulano')
   })
 
-  it('GET /users/:id/events', async () => {
+  it('GET /api/users/:id/events', async () => {
     const res = await supertest(server)
     .get('/api/users/1/events')
     .set('Authorization', token1)
-    // console.log(res)
     expect(res.statusCode).toBe(200)
     expect(res.type).toBe('application/json')
     expect(res.body).toHaveLength(2)

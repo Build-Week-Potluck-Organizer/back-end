@@ -23,7 +23,7 @@ router.post("/register", validateUserData, checkUsername, (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message: "unable to register new user",
+        message: "user registration failed",
       });
     });
 });
@@ -45,11 +45,11 @@ router.post("/login", validateUserData, (req, res) => {
           token: token,
         });
       } else {
-        res.status(401).json({ error: "Invalid username or password." });
+        res.status(401).json({ error: "username or password invalid" });
       }
     })
     .catch((err) => {
-      res.status(500).json({ message: "Unable to log user into system." });
+      res.status(500).json({ message: "login failed" });
     });
 });
 
@@ -69,21 +69,21 @@ function checkUsername(req, res, next) {
       }
     })
     .catch((err) => {
-      res.status(500).json({ error: "Internal server error adding user." });
+      res.status(500).json({ error: "system error" });
     });
 }
 
 function validateUserData(req, res, next) {
   if (Object.keys(req.body).length === 0) {
-    res.status(400).json({ error: "Request missing username and password." });
+    res.status(400).json({ error: "username and password required" });
   } else if (req.body.username === undefined) {
-    res.status(400).json({ error: "Request missing required field: username." });
+    res.status(400).json({ error: "username required" });
   } else if (req.body.password === undefined) {
-    res.status(400).json({ error: "Request missing required field: password." });
+    res.status(400).json({ error: "password required" });
   } else if (req.body.username === '') {
-    res.status(400).json({ error: "A username cannot be an empty string." });
+    res.status(400).json({ error: "username must contain characters" });
   } else if (req.body.password === '') {
-    res.status(400).json({ error: "A password cannot be an empty string." });
+    res.status(400).json({ error: "password must contain characters" });
   } else {
     next();
   }
